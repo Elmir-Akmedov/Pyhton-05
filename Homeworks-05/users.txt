@@ -1,0 +1,2 @@
+dict_keys(['Elmir']) = dict_values(['elmir2'])
+{'Elmir': 'elmir'} = {'Elmir': 'elmir'}
