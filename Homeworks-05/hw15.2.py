@@ -305,7 +305,7 @@ if user_input % 2 == 0:
     print("Not prime num")
 else:
     print("prime num")
-"""
+
 
 #
 #- Chat GPT's Project -
@@ -377,7 +377,7 @@ def password_validation():
         print("Invalid password")
 
 password_validation()
-
+"""
 #
 #Quiz.
 #1. What is the purpose of the continue statement in a for loop?
@@ -492,3 +492,6 @@ password_validation()
 #True or False: Using continue is more appropriate when you want to skip the 
 #current iteration and proceed to the next iteration based on a certain condition, 
 #but you still want to continue the loop.
+# 5.78 = 5.8, 5.0 = 5
+
+
