@@ -462,9 +462,6 @@ password_validation()
 #    10 Table
 #    20 Chair
 #    20 Table
-#    b)
-#    10 Chair
-#    10 Table
 #
 #11. What is the output of the following loop?
 #    for l in 'Jhon':
@@ -473,25 +470,30 @@ password_validation()
 #        print(l, end=", ")
 #            
 #    a) J, h, n,
-#    b) J, h, o, n,
 #
 #- True or False -
 #True or False: A for loop in Python can be nested within another for loop.
+True
 #True or False: The continue statement is used to immediately exit the loop
 #and terminate the program.
+True
 #True or False: The break statement is used to exit the loop prematurely, 
 #regardless of whether the loop condition is met.
+True
 #True or False: The break statement is used to skip the rest of the loop and 
 #move to the next iteration.
+False
 #True or False: The continue statement is used to exit the loop prematurely, 
 #regardless of whether the loop condition is met.
+False
 #True or False: Using break is more appropriate when you want to exit the 
 #loop prematurely based on a certain condition, regardless of whether the 
 #loop has completed all iterations. It allows you to terminate the loop early 
 #and continue with the rest of the program.
+True
 #True or False: Using continue is more appropriate when you want to skip the 
 #current iteration and proceed to the next iteration based on a certain condition, 
 #but you still want to continue the loop.
-# 5.78 = 5.8, 5.0 = 5
+True
 
 
