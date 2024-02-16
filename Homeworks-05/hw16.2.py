@@ -38,7 +38,6 @@ Reverse Pyramid
       ***
        *
 Q. Write the shortest program that prints the position and each character of a string.
-
 print([f"{x}:{"Elmir"[x]}" for x in range(len(Elmir)])
 R. You have the following dictionary:
 data = {

@@ -1,5 +1,5 @@
 """
-"""
+
 #- While Loops -
 #A. Write a program that asks user for a number between 100 and 500. The program should ask the user
 #until he/she enters the number within a given range.
@@ -16,32 +16,163 @@ while True:
 #B. Write a program that prints even and odd numbers between 1 to the entered number.
 print("Enter any number you want:")
 user_input = int(input(">> "))
+even_nums = []
+odd_nums = []
+
+for x in range(1, user_input):
+    if x % 2 == 0:
+        even_nums.append(x)
+    else:
+        odd_nums.append(x)
+
+print(f"Even nums: {even_nums}")
+print(f"Odd nums: {odd_nums}")
 
 #C. Write a program to display each character from a string and if a 
 #character is number then stop the loop.
+string = "Elmir2Seymur"
+for x in string:
+    if x.isdigit():
+        print(x)
+        break
+    print(x)
+
 #D. Write a program to calculate the sum of series up to n term. For example, 
 #if n=5 the series will become 2 + 22 + 222 + 2222 + 22222 = 24690
+a = "2"
+b = "2"
+digits = []
+for x in range(5):
+    digits.append(int(b))
+    b = b + a
+
+digits_sum = sum(digits)
+print(digits_sum)
+
+
 #E. Create a program that prompts the user to enter a number, 
 #then use a while loop to count from 1 up to the user's number.
+user_input = int(input(">> "))
+for x in range(1, user_input + 1):
+    print(x, end=",")
+
 #F. Write a Python program that uses a while loop to print numbers from 1 to 10.
+num = 1
+while num <= 10:
+    print(num)
+    num += 1
+
 #G. Write a program that checks if a user-entered string is a palindrome (reads the same forwards 
 #and backwards) using a while loop. Ignore spaces and letter case.
+user_input = input(">> ").lower().replace(" ", "")
+start = 0
+end = len(user_input) - 1
+
+while True:
+    if user_input[start] == user_input[end]:
+        print("Polindrom")
+        break
+    start += 1
+    end -= 1
+    if start > end:
+        print("Not polindrom")
+        break
+
+
 #H. Write a program that asks the user for an integer. If the number is even, divide it by 2, 
 #if it's odd, multiply it by 3 and add 1. Repeat this process with the result until the result 
 #becomes 1, and count how many steps it took.
+
+user_input = (int(input(">> ")))
+steps = 0
+while user_input != 1:
+    if user_input % 2 == 0:
+        user_input = user_input / 2
+    else:
+        user_input = (user_input * 3) + 1
+    steps += 1
+print(steps)
+
+
 #I. Create a program that calculates the sum of all even numbers from 1 to a user-specified 
 #number using a while loop.
+
+user_input = int(input(">> "))
+x = 0
+a = 0
+while x != user_input + 1:
+    sum = a + x
+    a += x
+    x += 1
+print(sum)
+
+
 #J. Create a program that takes a list of numbers as input and reverses the list using a while loop. 
 #Do this without using any built-in list reversal methods.
+
+user_input = input(">> ").split()
+end = len(user_input) - 1
+while end != -1:
+    print(user_input[end], end=",")
+    end -= 1
+
+  
 #
 #- Extra Hard -
 #Task A. Count the total number of digits in a number. If user enters 547,
 #the program should add each digit, so the output is 16 (as 5 + 4 + 7 = 16).
+
+user_input = input(">> ")
+
+def count_digits(user_num):
+    digits = [float(x) for x in user_num]
+    digits_sum = sum(digits)
+    print(digits_sum)
+
+
+if __name__ == "__main__":
+    count_digits(user_input)
+
 #Task B. Write a program to display all prime numbers within a range.
+user_input = int(input(">> "))
+prime_nums = []
+for num in range(2, user_input + 1):
+    is_prime = True
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            is_prime = False
+            break
+    if is_prime:
+        prime_nums.append(num)
+print(prime_nums)
+
+
 #Task C. Create a program that takes a string as input and uses a while loop to reverse 
 #and print the characters of the string.
+
+user_input = input(">> ")
+end = len(user_input) - 1
+while end != -1:
+    print(user_input[end], end=",")
+    end -= 1
+ 
 #Task D. Write a program that checks if a user-entered string is a palindrome (reads the 
 #same forwards and backwards) using a while loop. Ignore spaces and letter case.
+
+user_input = input(">> ").lower().replace(" ", "")
+start = 0
+end = len(user_input) - 1
+
+while True:
+    if user_input[start] == user_input[end]:
+        print("Polindrom")
+        break
+    start += 1
+    end -= 1
+    if start > end:
+        print("Not polindrom")
+        break
+
 #Task E. Develop a program that takes an integer as input and prints a number pyramid using a 
 #while loop. For example, if the user enters 5, the program should print:
 #    1
@@ -49,34 +180,107 @@ user_input = int(input(">> "))
 #  12321
 # 1234321
 #123454321
-#
+user_input = int(input(">> ")) 
+x = 1
+
+while x <= user_input:
+    spaces = " " * (user_input - x)
+    numbers = ""
+    for i in range(1, x + 1):
+        numbers += str(i)
+    for j in range(x - 1, 0, -1):
+        numbers += str(j)
+    print(spaces + numbers)
+    x += 1
+
 #- Chat GPT's Homework -
 #Task 1: Countdown Timer
 #Write a program that uses a while loop to create a countdown timer. 
 #Ask the user to enter a number of seconds, and then display a countdown 
 #from that number down to 0.
-#
+import time
+import os
+
+
+
+start = int(input(""))
+while start >= 0:
+    print(start)
+    time.sleep(1)
+    os.system("cls")
+    start -= 1
+
+
 #Task 2: Number Guessing Game
 #Create a number guessing game where the computer generates a random number, 
 #and the user has to guess it. Use a while loop to allow the user to keep 
 #guessing until they correctly guess the number.
-#
+import random
+
+random_num = random.randint(1, 3)
+
+while True:
+    user_input = int(input(">> "))
+    if random_num == user_input:
+        print("correct")
+        break
+    else:
+        print("Wrong")
+
+
+
 #Task 3: Factorial Calculator
 #Write a program that calculates the factorial of a given number using a while 
 #loop. Ask the user for an integer input and compute its factorial.
-#
+user_input = int(input(">> "))
+x = 2
+c = 1
+while x <= user_input:
+    c = c * x
+    x += 1
+    
+print(c)
+
 #Task 4: Password Validation
 #Implement a program that asks the user to enter a password. Use a while loop 
 #to keep asking for the password until it matches a predefined correct password.
-#
+
+
+passwords = ["elmir", "elmir2", "elmir3", "elmir4","elmir5"]
+print("Please enter password:")
+password = input(">> ")
+while True:
+    if password in passwords:
+        print("Correct")
+        break
+
 #Task 6: Sum of Even Numbers
 #Calculate and display the sum of all even numbers from 1 to a user-defined 
 #upper limit using a while loop.
-#
+
+user_input = int(input(">> "))
+x = 1
+even_nums = []
+while x <= user_input:
+    if x % 2 == 0:
+        even_nums.append(x)
+    x += 1
+print(sum(even_nums))
+
+
+
 #Task 7: Multiplication Table
 #Generate and display the multiplication table for a given number using a while 
 #loop. Ask the user for the number and the range (e.g., 1 to 10).
-#
+user_input = int(input(">> "))
+start = int(input(">> "))
+end = int(input(">> "))
+
+while start <= end:
+    result = user_input * start
+    print(f"{user_input} * {start} = {result}")
+    start += 1
+
 #Task 8: Pattern Printing
 #Write a program that uses a while loop to print a pattern of asterisks, 
 #where the number of asterisks on each line is equal to the line number. 
@@ -86,68 +290,57 @@ user_input = int(input(">> "))
 #***
 #****
 #*****
-#
+
+user_input = int(input(">> "))
+n = 1
+while n <= user_input:
+    stars = "*" * n
+    print(stars)
+    n += 1
+
 #Task 9: Task with a for loop
 #Create a program that uses both while and for loops. Ask the user for a number 
 #and print its multiplication table using a for loop inside the while loop. 
 #Continue asking for numbers until the user enters '0' to exit.
-#
+
+while True:
+    user_input = int(input(">> "))
+    start = int(input(">> "))
+    end = int(input(">> "))
+    for x in range(end):
+        result = user_input * start
+        print(f"{user_input} * {start} = {result}")
+        start += 1
+    if user_input == 0:
+        break
+"""
 #Quiz.
 #1. What is the primary purpose of a while loop in Python?
-#    a) To execute a block of code a specific number of times.
-#    b) To execute a block of code indefinitely.
 #    c) To repeatedly execute a block of code as long as a specified condition remains true.
-#    d) To execute a block of code only once.
 #
 #2. What are some best practices for using while loops in Python?
-#    a) Always initialize loop control variables within the loop.
-#    b) Use vague variable names to encourage creativity.
-#    c) Avoid ensuring the loop condition will eventually become false.
 #    d) Use meaningful variable names and prevent infinite loops.
 #
 #3. What should you consider when using a while loop in Python?
 #    a) Potential performance impact.
-#    b) Using while loops for known iterations.
-#    c) Never managing loop control variables.
-#    d) Using while loops for all types of iterations.
 #
 #4. What are the key differences between while and for loops in Python?
-#    a) While loops are primarily used for iteration, while for loops are used 
-#    for conditional execution.
 #    b) While loops are preferred when you know the number of iterations in advance.
-#    c) For loops require manual management of the loop control variable and condition.
-#    d) For loops are more flexible and can handle dynamic conditions, while 
-#    while loops are used for iterating over sequences.
 #
 #5. What is the potential risk of using an infinite while loop in your code?
-#    a) It can improve code performance.
 #    b) It can lead to unexpected program termination.
-#    c) It's a best practice for certain situations.
-#    d) It simplifies code readability.
 #
 #6. How do you ensure that a while loop will terminate and not result in an infinite loop?
-#    a) By not using while loops at all.
-#    b) By initializing loop control variables within the loop.
 #    c) By ensuring the loop condition becomes false at some point.
-#    d) By using a try-except block.
 #
 #7. Which of the following statements is true about the loop control variable in a while loop?
-#    a) It should always be initialized within the loop.
-#    b) It should be set to any random value before entering the loop.
 #    c) It is used to define the loop condition and manage loop execution.
-#    d) It is optional and not required for a while loop.
 #
 #8. In Python, what happens when the condition of a while loop is initially False?
 #    a) The loop is skipped entirely, and the code continues after the loop.
-#    b) An error is raised.
-#    c) The loop executes at least once.
-#    d) The loop runs indefinitely.
 #
 #9. What is an off-by-one error in the context of while loops?
 #    a) An error that occurs when the loop control variable is not properly initialized.
-#    b) An error that happens when a loop runs one more or one less time than intended.
-#    c) An error that occurs when the loop condition is too complex.
-#    d) An error that occurs when using for loops instead of while loops.
 #
 #10. What is the output of the following code?
 #    count = 1
@@ -156,18 +349,12 @@ user_input = int(input(">> "))
 #        count += 1
 #
 #    a) 1 2 3 4 5
-#    b) 1 2 3 4
-#    c) 1 2 3 4 5 6
-#    d) 2 3 4 5
 #
 #11. What is the output of the following code?
 #    while True:
 #        print("Infinite Loop")
 #
-#    a) Infinite Loop
 #    b) Nothing (The loop will run indefinitely)
-#    c) Error
-#    d) None of the above
 #
 #12. What is the output of the following code?
 #    count = 1
@@ -177,10 +364,7 @@ user_input = int(input(">> "))
 #        print(count)
 #        count += 1
 #
-#    a) 1 2 3 4 5 6 7 8 9 10
 #    b) 1 2 3 4
-#    c) 5 6 7 8 9 10
-#    d) 1 2 3 4 6 7 8 9 10
 #
 #13. What is the output of the following code?
 #    count = 1
@@ -192,9 +376,6 @@ user_input = int(input(">> "))
 #        count += 1
 #
 #    a) 1 2 3 4 5
-#    b) 1 3 5
-#    c) 2 4
-#    d) 1 2 4
 #
 #14. What is the output of the following code?
 #    outer_count = 1
@@ -205,10 +386,6 @@ user_input = int(input(">> "))
 #            inner_count += 1
 #        outer_count += 1
 #
-#    a) 1 1 2 1 3 1
-#    b) 1 1 2 1 3 2
-#    c) 1 2 2 2 3 1
-#    d) 1 2 2 1 3 2
 #    e) None of the above
 #
 #15. What is the output of the following code?
@@ -220,9 +397,6 @@ user_input = int(input(">> "))
 #    print(fact)
 #
 #    a) 120
-#    b) 30
-#    c) 720
-#    d) 25
 #
 #16. What is the output of the following code?
 #    total = 0
@@ -233,10 +407,7 @@ user_input = int(input(">> "))
 #        total += num
 #    print("Sum:", total)
 #
-#    a) The program adds numbers until the user enters 0 and then displays the sum.
-#    b) The program keeps asking for numbers indefinitely.
-#    c) The program calculates the factorial of the entered number.
-#    d) The program displays an error message.
+#    a) The program adds numbers until the user enters 0 and then displays the sum..
 #
 #17. What is the value of x:
 #    x = 0
@@ -244,9 +415,6 @@ user_input = int(input(">> "))
 #        x += 2
 #        print(x)
 #
-#    a) 101
-#    b) 99
-#    c) None of the above, this is an infinite loop
 #    d) 100
 #
 #18. What is the output of the following if statement
@@ -256,7 +424,6 @@ user_input = int(input(">> "))
 #    else:
 #        print('False')
 #
-#    a) False
 #    b) True
 #
 #19. What is the value of the var after the for loop completes its execution:
@@ -270,10 +437,7 @@ user_input = int(input(">> "))
 #    else:
 #        var+=1
 #
-#    a) 20
 #    b) 21
-#    c) 10
-#    d) 30
 #
 #20. What is the output of the following nested loop:
 #    for num in range(10, 14):
@@ -286,9 +450,6 @@ user_input = int(input(">> "))
 #    10
 #    11
 #    12
-#    13
-#    b)
-#    11
 #    13
 #
 #21. What is the output of the following nested loop:
@@ -304,7 +465,4 @@ user_input = int(input(">> "))
 #    10 Table
 #    20 Chair
 #    20 Table
-#    b) 
-#    10 Chair
-#    10 Table
 #"""

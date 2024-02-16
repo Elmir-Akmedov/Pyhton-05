@@ -298,14 +298,18 @@ print(digits_sum)
 
 #Task 3.
 #Write a program to display whether the number is prime or not.
-#Prime numbers are natural numbers that are divisible by only 1 and the number itself.
+#primebers are natural numbers that are divisible by only 1 and the number itself.
 
-user_input = int(input(">> "))
-if user_input % 2 == 0:
-    print("Not prime num")
+num = int(input(">> "))
+is_prime = True
+for i in range(2, int(num**0.5) + 1):
+    if num % i == 0:
+        is_prime = False
+        break
+if is_prime:
+    print("Its prime")
 else:
-    print("prime num")
-
+    print("Its not prime")
 
 #
 #- Chat GPT's Project -
