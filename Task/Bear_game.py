@@ -54,6 +54,9 @@ def bear_attack():
 
 def main():
     start_game()
+    """
+    "\033[1;32;40m" + "This is colored Text" + "\033[0;37;40m"
+    """
 
 def weapons_damage_configuration():
     for weapon in bear_game["Player"]["Weapons"]:
