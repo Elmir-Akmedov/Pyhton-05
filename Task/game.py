@@ -1,102 +1,152 @@
+
 import random
-import time
 from os import system
+from time import sleep
+from rich.console import Console
+
+console = Console()
+# Game configuration
+GAME_CONFIG = {
+    "Player": {
+        "HP": 100,
+        "Weapons": {"Hand": None, "Sword": None, "Bow": None}
+    },
+    "Bear": {
+        "HP": 500,
+        "Weapons": {"Paw": None, "Teeth": None}
+    }
+}
+
+# Game greeting text
+
+GREETING_TXT = (
+    "[red]Welcome to bear game.\n[/red]"
+    "You are a warrior and you are fighting with a bear.\n"
+    "You have to kill the bear to win the game."
+)
+
+CONTINUE_INSTRACTION = "Press Enter to continue."
 
 
-class Player:
-    def __init__(self, name, HP=100):
-        self.name = name
-        self.HP = HP
-        self.weapons = {
-            "Hand": Weapon("Hand", 1, 10),
-            "Sword": Weapon("Sword", 30, 50),
-            "Bow": Weapon("Bow", 60, 80)
-        }
-        self.current_weapon = None
-
-    def player_choose_weapon(self):
-        print("\nChoose your weapon:")
-        for idx, weapon in enumerate(self.weapons.keys(), start=1):
-            print(f"{idx}. {weapon}")
-        choice = input("Enter weapon number: ")
-        try:
-            choice_idx = int(choice)
-            if 1 <= choice_idx <= len(self.weapons):
-                self.current_weapon = list(self.weapons.values())[choice_idx - 1]
-                print(f"You chose {self.current_weapon.name}.")
-            else:
-                print("Invalid choice. Please try again.")
-                self.choose_weapon()
-        except ValueError:
-            print("Invalid choice. Please enter a number.")
-            self.choose_weapon()
-
-    def attack(self, target):
-        if not self.current_weapon:
-            print("You need to choose a weapon!")
-            return
-        print(f"\n{self.name} attacks with {self.current_weapon.name} for {self.current_weapon.damage} damage.")
-        target.receive_damage(self.current_weapon.damage)
-
-    def receive_damage(self, damage):
-        self.HP -= damage
+def display_greeting(time: int, message: str = ''):
+    """Displays the greeting message and starts the game"""
+    system('cls')
+    console.print(message, style="bold")
+    input("Press Enter to start the game.")
+    for i in range(time * 10):
+        system('cls')
+        print(f'Game starting{"." * (i % 10)}')
+        sleep(0.1)
+    system('cls')
 
 
-class Weapon:
-    def __init__(self, name, min_damage, max_damage):
-        self.name = name
-        self.damage = random.randint(min_damage, max_damage)
+def configure_weapons():
+    """Configures the damage range for each weapon"""
+    player_weapons = GAME_CONFIG["Player"]["Weapons"]
+    bear_weapons = GAME_CONFIG["Bear"]["Weapons"]
+
+    player_weapons["Hand"] = random.randint(10, 20)
+    player_weapons["Sword"] = random.randint(20, 50)
+    player_weapons["Bow"] = random.randint(50, 80)
+
+    bear_weapons["Paw"] = random.randint(1, 10)
+    bear_weapons["Teeth"] = random.randint(10, 20)
 
 
-class Bear(Player):
-    def __init__(self, HP=500):
-        super().__init__("Bear", HP)
-        self.weapons = {
-            "Paw": Weapon("Paw", 10, 20),
-            "Teeth": Weapon("Teeth", 20, 30)
-        }
+def display_weapons(weapons: dict):
+    """Displays the available weapons and their damage range"""
+    print("Your weapons:\n")
+    for idx, weapon in enumerate(weapons, 1):
+        print(f"{idx}. {weapon} -> Damage: {weapons[weapon]}\n")
+    return weapons
 
-    def bear_choose_weapon(self):
-        self.current_weapon = random.choice(list(self.weapons.values()))
-        print(f"Bear chose {self.current_weapon.name}.")
 
-def display_status(player, bear):
-    print(f" Player HP: {player.HP}")
-    print(f" Bear HP: {bear.HP}")
+def choose_weapon():
+    """Allows the player to choose a weapon"""
+    player_weapons = GAME_CONFIG["Player"]["Weapons"]
+    display_weapons(player_weapons)
+    print("Choose a weapon for fight(1, 2, 3): ")
+    weapon_idx = int(input(">> "))
+    chosen_weapon = list(player_weapons.keys())[weapon_idx - 1]
+    if chosen_weapon in player_weapons.keys():
+        print(f"You have chosen {chosen_weapon}.")
+        sleep(1)
+        print("Now you are ready to fight with the bear.")
+        print(CONTINUE_INSTRACTION, end="")
+        input()
+        system("cls")
+    else:
+        print("You have chosen wrong weapon.")
+        sleep(1)
+        print("Choose again.")
+        choose_weapon()
+    return chosen_weapon
+
+def bear_attack():
+    """Allows the bear to attack the player"""
+    bear_weapons = GAME_CONFIG["Bear"]["Weapons"]
+    bear_weapon = random.choice(list(bear_weapons))
+    damage = bear_weapons[bear_weapon]
+    print(f"Bear attacks you with {bear_weapon} - {damage} damage.")
+    GAME_CONFIG["Player"]["HP"] -= damage
+    sleep(1)
+    display_health()
+    input("Press Enter to continue.")
+    system("cls")
+    print("Now it's your turn.")
+    sleep(1)
+
+
+def attack(weapon):
+    """Allows the player to attack the bear"""
+    player_weapons = GAME_CONFIG["Player"]["Weapons"]
+    damage = player_weapons[weapon]
+    print(f"You attack the bear with {weapon} - {damage} damage.")
+    GAME_CONFIG["Bear"]["HP"] -= damage
+    display_health()
+    input("Press Enter to continue.")
+    system("cls")
+    sleep(1)
+    bear_attack()
+    if GAME_CONFIG["Bear"]["HP"] <= 0:
+        print("You have killed the bear.")
+        sleep(1)
+        print("You have won the game.")
+    elif GAME_CONFIG["Player"]["HP"] <= 0:
+        print("Bear has killed you.")
+        sleep(1)
+        print("You have lost the game.")
+    else:
+        attack(choose_weapon())
+
+
+def display_health():
+    """Displays the health of the player and the bear"""
+    if GAME_CONFIG["Player"]["HP"] <= 0:
+        GAME_CONFIG["Player"]["HP"] = 0
+    if GAME_CONFIG["Bear"]["HP"] <= 0:
+        GAME_CONFIG["Bear"]["HP"] = 0
+    print(f"Player HP: {GAME_CONFIG['Player']['HP']}")
+    sleep(1)
+    print(f"Bear HP: {GAME_CONFIG['Bear']['HP']}")
+    sleep(1)
+
+
+def start_game():
+    """Starts the game"""
+    print("You have 3 weapons to kill the bear.")
+    current_weapon = choose_weapon()
+    attack(current_weapon)
 
 
 def main():
-    system('cls')
-    print("Welcome to the Bear game")
-
-    player_name = input("Enter your name: ")
-    player = Player(player_name)
-    bear = Bear()
-
-    while player.HP > 0 and bear.HP > 0:
-        time.sleep(1)
-        system('cls')
-        print("\n" + "=" * 30)
-        display_status(player, bear)
-        print("\n" + "=" * 30)
-        print("\nPlayer's Turn:")
-        player.player_choose_weapon()
-        bear.bear_choose_weapon()
-        player.attack(bear)
-        if bear.HP <= 0:
-            print("Bear is defeated!")
-            break
-
-        print("\nBear's Turn:")
-        bear.attack(player)
-        if player.HP <= 0:
-            print("Player is defeated!")
-            break
-        input("\nPress Enter to continue...")
-
-    print("\nGame Over")
-    display_status(player, bear)
-    print("\nThanks for playing!")
+    """Main function to control the flow of the game"""
+    display_greeting(5, GREETING_TXT)
+    configure_weapons()
+    start_game()
+    display_health()
+    sleep(1)
+    print("Game Over")
 
 
 if __name__ == "__main__":
